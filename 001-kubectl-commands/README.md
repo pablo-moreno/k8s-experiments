@@ -1,6 +1,6 @@
 # kubectl examples
 
-Create namespace 001
+Create namespace 001:
 
 ```bash
 kubectl create namespace 001
