@@ -27,7 +27,7 @@ kubectl expose deployment hello-app
 Create ingress with prefix rule:
 
 ```bash
-kubectl create ingress hello-app --rule=hello.k8s.local/*=hello-app:8080
+kubectl create ingress hello-app --rule=001.k8s.local/*=hello-app:8080
 ```
 
 Scale deployment `hello-app` to 4 replicas:
@@ -42,14 +42,13 @@ Get minikube cluster ip:
 minikube ip
 ```
 
-> !! Edit `/etc/hosts` to add the domain `hello.k8s.local` associated with the `minikube ip` result.
+> !! Edit `/etc/hosts` to add the domain `001.k8s.local` associated with the `minikube ip` result.
 
 Use `curl` to check that the load balancer is working:
 
 ```bash
-watch curl http://hello.k8s.local
+watch curl http://001.k8s.local
 ```
-
 
 ## Extra
 
@@ -74,12 +73,12 @@ kubectl delete ingress hello-app
 Create a new ingress with two rules:
 
 ```bash
-kubectl create ingress hello-app --rule=hello.k8s.local/v1/*=hello-app:8080 --rule=hello.k8s.local/v2/*=hello-app-2:8080
+kubectl create ingress hello-app --rule=001.k8s.local/v1/*=hello-app:8080 --rule=001.k8s.local/v2/*=hello-app-2:8080
 ```
 
 Check redirections:
 
 ```bash
-curl -sL http://hello.k8s.local/v1/
-curl -sL http://hello.k8s.local/v2/
+curl -sL http://001.k8s.local/v1/
+curl -sL http://001.k8s.local/v2/
 ```
