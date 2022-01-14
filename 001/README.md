@@ -35,3 +35,17 @@ Scale deployment `hello-app` to 4 replicas:
 ```bash
 kubectl scale deployment hello-app --replicas=4
 ```
+
+Get minikube cluster ip:
+
+```bash
+minikube ip
+```
+
+> !! Edit `/etc/hosts` to add the domain `hello.k8s.local` associated with the `minikube ip` result.
+
+Use `curl` to check that the load balancer is working:
+
+```bash
+watch curl http://hello.k8s.local
+```
