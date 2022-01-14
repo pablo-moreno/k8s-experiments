@@ -49,3 +49,37 @@ Use `curl` to check that the load balancer is working:
 ```bash
 watch curl http://hello.k8s.local
 ```
+
+
+## Extra
+
+Create another deployment for v2
+
+```bash
+kubectl create deployment hello-app-2 --image=gcr.io/google-samples/hello-app:2.0 --port=8080
+```
+
+Expose the deployment
+
+```bash
+kubectl expose deployment hello-app-2
+```
+
+Delete previous ingress: 
+
+```bash
+kubectl delete ingress hello-app
+```
+
+Create a new ingress with two rules:
+
+```bash
+kubectl create ingress hello-app --rule=hello.k8s.local/v1/*=hello-app:8080 --rule=hello.k8s.local/v2/*=hello-app-2:8080
+```
+
+Check redirections:
+
+```bash
+curl -sL http://hello.k8s.local/v1/
+curl -sL http://hello.k8s.local/v2/
+```
